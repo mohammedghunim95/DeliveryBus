@@ -1,0 +1,192 @@
+﻿@model DeliveryBus.Models.Region
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "Regions", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+<div class="shadow" style="margin-top:50px;">
+    <div class="card">
+        <div class="card-header">
+            <center> <h3>Create Regions</h3></center>
+
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @*@Html.DropDownList("Time", null, new { @class = "form-control" })*@
+                        <select class="form-control" name="Time">
+                            <option>06:00 am</option>
+                            <option>06:05 am</option>
+                            <option>06:10 am</option>
+                            <option>06:15 am</option>
+                            <option>06:20 am</option>
+                            <option>06:25 am</option>
+                            <option>06:30 am</option>
+                            <option>06:55 am</option>
+                            <option>06:40 am</option>
+                            <option>06:45 am</option>
+                            <option>06:50 am</option>
+                            <option>06:55 am</option>
+                            <option>07:00 am</option>
+                            <option>07:05 am</option>
+                            <option>07:10 am</option>
+                            <option>07:15 am</option>
+                            <option>07:20 am</option>
+                            <option>07:25 am</option>
+                            <option>07:30 am</option>
+                            <option>07:35 am</option>
+                            <option>07:40 am</option>
+                            <option>07:45 am</option>
+                            <option>07:50 am</option>
+                            <option>07:55 am</option>
+                            <option>08:00 am</option>
+                            <option>08:05 am</option>
+                            <option>08:10 am</option>
+                            <option>08:15 am</option>
+                            <option>08:20 am</option>
+                            <option>08:25 am</option>
+                            <option>08:30 am</option>
+                            <option>08:35 am</option>
+                            <option>08:40 am</option>
+                            <option>08:45 am</option>
+                            <option>08:50 am</option>
+                            <option>08:55 am</option>
+                            <option>09:00 am</option>
+                            <option>09:05 am</option>
+                            <option>09:10 am</option>
+                            <option>09:15 am</option>
+                            <option>09:20 am</option>
+                            <option>09:05 am</option>
+                            <option>09:10 am</option>
+                            <option>09:15 am</option>
+                            <option>09:20 am</option>
+                            <option>09:25 am</option>
+                            <option>09:35 am</option>
+                            <option>09:40 am</option>
+                            <option>09:45 am</option>
+                            <option>09:50 am</option>
+                            <option>09:55 am</option>
+
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                @*<div class="form-group">
+            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                <select class="form-control" name="Ts">
+                    <option>06:00 am</option>
+                    <option>06:05 am</option>
+                    <option>06:10 am</option>
+                    <option>06:15 am</option>
+                    <option>06:20 am</option>
+                    <option>06:25 am</option>
+                    <option>06:30 am</option>
+                    <option>06:55 am</option>
+                    <option>06:40 am</option>
+                    <option>06:45 am</option>
+                    <option>06:50 am</option>
+                    <option>06:55 am</option>
+                    <option>07:00 am</option>
+                    <option>07:05 am</option>
+                    <option>07:10 am</option>
+                    <option>07:15 am</option>
+                    <option>07:20 am</option>
+                    <option>07:25 am</option>
+                    <option>07:30 am</option>
+                    <option>07:35 am</option>
+                    <option>07:40 am</option>
+                    <option>07:45 am</option>
+                    <option>07:50 am</option>
+                    <option>07:55 am</option>
+                    <option>08:00 am</option>
+                    <option>08:05 am</option>
+                    <option>08:10 am</option>
+                    <option>08:15 am</option>
+                    <option>08:20 am</option>
+                    <option>08:25 am</option>
+                    <option>08:30 am</option>
+                    <option>08:35 am</option>
+                    <option>08:40 am</option>
+                    <option>08:45 am</option>
+                    <option>08:50 am</option>
+                    <option>08:55 am</option>
+                    <option>09:00 am</option>
+                    <option>09:05 am</option>
+                    <option>09:10 am</option>
+                    <option>09:15 am</option>
+                    <option>09:20 am</option>
+                    <option>09:05 am</option>
+                    <option>09:10 am</option>
+                    <option>09:15 am</option>
+                    <option>09:20 am</option>
+                    <option>09:25 am</option>
+                    <option>09:35 am</option>
+                    <option>09:40 am</option>
+                    <option>09:45 am</option>
+                    <option>09:50 am</option>
+                    <option>09:55 am</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+            </div>
+
+        </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        <input type="file" name="upload" class="form-control boxStyle" id="imagesjs" />
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BusLinesId, "BusLinesId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("BusLinesId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BusLinesId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+}

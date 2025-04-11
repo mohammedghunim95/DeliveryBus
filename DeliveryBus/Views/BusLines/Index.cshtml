@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DeliveryBus.Models.BusLine>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="example ui celled table table-bordered table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.busCompany.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.busTime.Times)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Line)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="pan">
+                <td>
+                    @Html.DisplayFor(modelItem => item.busCompany.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.busTime.Times)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Line)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gate)
+                </td>
+                <td>
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" alt="Alternate Text" style="width:100px;height:100px;" />
+
+                </td>
+                <td>
+                    <a class="btn btn-primary" style="padding-right:10px;" title="Edit" href="~/BusLines/Edit/@item.BusLinesId">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </a>
+
+                    @*<a class="btn btn-info" style="padding-right:10px;" title="Details" href="~/BusLines/Details/@item.BusLinesId">
+                        <i class="fas fa-info-circle"></i>
+                        Details
+                    </a>*@
+
+                    <button title="Delete" id="btnDelete" class="btn btn-danger" data-id="@item.BusLinesId"><i class="fas fa-trash"></i> Delete</button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function(){
+
+        $(document).on('click', '#btnDelete', function () {
+            var b = $(this);
+            if (confirm("Are you sure remove it")) {
+            $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("Delete", "BusLines")',
+                 data: {
+                     id: $(b).attr('data-id')
+                },
+                success: function () {
+                    $("#btnDelete").parents("#pan").remove()
+                 }
+
+                });
+            }
+
+        });
+    });
+    </script>
+}

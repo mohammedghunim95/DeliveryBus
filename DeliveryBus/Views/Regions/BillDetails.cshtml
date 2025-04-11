@@ -1,0 +1,70 @@
+﻿@model DeliveryBus.Models.ApplyTrip
+
+@{
+    ViewBag.Title = "BillDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>BillDetails</h2>
+
+<div>
+    <h4>ApplyTrip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            User Name
+        </dt>
+
+        <dd>
+            @Session["user"]
+        </dd>
+        <dt>
+            Line of Bus
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subscribe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subscribe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+</div>

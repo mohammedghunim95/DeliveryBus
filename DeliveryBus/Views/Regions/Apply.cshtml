@@ -1,0 +1,92 @@
+﻿@model DeliveryBus.Models.ApplyTrip
+
+@{
+    ViewBag.Title = "Apply";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $("#pr").prop("readonly", true);
+        $("#sel").change(function () {
+            if ($("#sel").val() == "0.50") {
+                $("#pr").val(0.50);
+            }
+            else if ($("#sel").val() == "0.50") {
+                $("#pr").val(0.50);
+            }
+            else if ($("#sel").val() == "1.00") {
+                $("#pr").val(1.00);
+            }
+            else if ($("#sel").val() == "2.50") {
+                $("#pr").val(2.50);
+            }
+            else {
+                $("#pr").val(10.00);
+            }
+        });
+    })
+</script>}
+
+<h2>Book A Trip</h2>
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>ApplyTrip</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group" style="visibility:hidden;">
+        @Html.Label("Message", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextArea("Message", null, new { @class = "form-control" })
+            @Html.ValidationMessage("Message", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subscribe, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="sel" class="form-control" name="sub">
+                        <option selected disabled>-- Select Option --</option>
+                        <option value="0.50">Go</option>
+                        <option value="0.50">Back</option>
+                        <option value="1.00">Go and Back</option>
+                        <option value="2.50">Weekly</option>
+                        <option value="10.00">Monthly</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Subscribe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label>Price</label>
+            <input id="pr" type="text" class="form-control" style="width:100%;" name="subPrice" value="" />
+        </div>
+        <div class="col-md-3">
+            <label>Balance</label>
+            <input disabled  type="text" class="form-control" style="width:100%;" name="" value="@Session["s"]" />
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input name="subPrice" type="submit" value="Go To Payment" class="btn btn-danger" />
+        </div>
+    </div>
+</div>
+}
+

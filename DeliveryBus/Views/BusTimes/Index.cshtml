@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DeliveryBus.Models.BusTime>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="example ui celled table table-bordered table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Times)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Days)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Days)
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="pan">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Times)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Days)
+                </td>
+                <td>
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" alt="Alternate Text" style="width:100px;height:100px;" />
+
+                </td>
+                <td>
+                    <a class="btn btn-primary" style="padding-right:10px;" title="Edit" href="~/bustimes/Edit/@item.BusTimeId">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </a>
+
+                    @*<a class="btn btn-info" style="padding-right:10px;" title="Details" href="~/BusLines/Details/@item.BusLinesId">
+                            <i class="fas fa-info-circle"></i>
+                            Details
+                        </a>*@
+
+                    <button title="Delete" id="btnDelete" class="btn btn-danger" data-id="@item.BusTimeId"><i class="fas fa-trash"></i> Delete</button>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function(){
+
+        $(document).on('click', '#btnDelete', function () {
+            var b = $(this);
+            if (confirm("Are you sure remove it")) {
+            $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("Delete", "BusTimes")',
+                 data: {
+                     id: $(b).attr('data-id')
+                },
+                success: function () {
+                    $("#btnDelete").parents("#pan").remove()
+                 }
+
+                });
+            }
+
+        });
+    });
+    </script>
+}

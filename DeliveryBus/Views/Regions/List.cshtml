@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DeliveryBus.Models.Region>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="row">
+    @if(Model != null) { 
+    foreach(var x in Model)
+    {
+        <div class="col-md-6">
+            <div class="shadow">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 style="font-family:cursive">@x.Name</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img style="width:100%" src="~/images/@x.Image" alt="@x.Image" />
+                            </div>
+                            <div class="col-md-6">
+                                @*<h3>@x.BusLine.Gate</h3>
+        <h3> @x.BusLine.Line</h3>*@
+                                <h3>Time: @x.Time</h3>
+                                <h3>Price: @x.Price</h3>
+                                <br /><br /><br />
+                                @Html.ActionLink("Details", "Details", new { id = x.RegionId }, new { @class = "btn btn-primary" })
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+</div>
+

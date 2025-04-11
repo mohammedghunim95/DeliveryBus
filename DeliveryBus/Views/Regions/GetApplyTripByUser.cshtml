@@ -1,0 +1,105 @@
+﻿@model IEnumerable<DeliveryBus.Models.ApplyTrip>
+
+@{
+    ViewBag.Title = "GetApplyTripByUser";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>All My Trip</h2>
+
+@*DataTable*@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+<table id="example" class="ui celled table table-bordered table-hover display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subscribe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Session["user"]</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subscribe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+
+  @{ 
+      DateTime oldTime = item.DateTime;
+      DateTime x5MinsLater = oldTime.AddMinutes(5);
+      string a = (string.Format("{0}", oldTime));
+      string b = (string.Format("{0}", x5MinsLater));
+  }
+
+            @if ( x5MinsLater < DateTime.Now)
+            {
+
+                <td style="display:none;">
+                    @Html.ActionLink("DeleteTrip", "DeleteTrip", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+
+            }
+            else
+            {
+                <td style="">
+                    @Html.ActionLink("DeleteTrip", "DeleteTrip", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    @*DataTable*@
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                "searching": false,
+                "paging": false,
+                buttons: [
+                    'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+}

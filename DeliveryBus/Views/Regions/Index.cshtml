@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DeliveryBus.Models.Region>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="example ui celled table table-bordered table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BusLine.Line)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+        <tr id="pan">
+            <td>
+                @Html.DisplayFor(modelItem => item.BusLine.Line)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a class="btn btn-primary" style="padding-right:10px;" title="Edit" href="~/Regions/Edit/@item.RegionId">
+                    <i class="fas fa-edit"></i>
+                    Edit
+                </a>
+
+                @*<a class="btn btn-info" style="padding-right:10px;" title="Details" href="~/BusLines/Details/@item.BusLinesId">
+                <i class="fas fa-info-circle"></i>
+                Details
+            </a>*@
+
+                <button title="Delete" id="btnDelete" class="btn btn-danger" data-id="@item.RegionId"><i class="fas fa-trash"></i> Delete</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function(){
+
+        $(document).on('click', '#btnDelete', function () {
+            var b = $(this);
+            if (confirm("Are you sure remove it")) {
+            $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("Delete", "Regions")',
+                 data: {
+                     id: $(b).attr('data-id')
+                },
+                success: function () {
+                    $("#btnDelete").parents("#pan").remove()
+                 }
+
+                });
+            }
+
+        });
+    });
+    </script>
+}
